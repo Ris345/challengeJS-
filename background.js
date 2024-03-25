@@ -74,13 +74,24 @@
 // setInterval(tabActive, 1000)
 // tabActive();
 
-let visibility = document.visibilityState; 
+const outputList = document.getElementById("output-stream-list")
+const statusElement = document.getElementById("status")
 const start = () => {
+      debugger; 
+    let visibility = document.visibilityState; 
+    let hidden = document.hidden; 
     const timeStamp = (new Date().toLocaleString());
-    if (visibility || !visibility) {
+    if (visibility || !hidden) {
         // continue logging in the time stamp 
-        console.log(timeStamp); 
-        
+        if (!hidden) {
+            visibility = 'visible'; 
+        }
+        const logText = `${visibility} ${timeStamp}`
+        const listItem = document.createElement("li")
+        listItem.appendChild(document.createTextNode(logText))
+        outputList.prepend(listItem)
+        statusElement.innerText = visibility ? "Tab has always been active :)" : "Tab became inactive :("
+        statusElement.style.color = visibility ? "green" : "red"
     }
 }
 
@@ -92,5 +103,5 @@ start();
 
 // when the user is on the tab the timestamps consistently logs in 
 // when the user moves away from the tab the timestamp stops logging in 
-// whether user is inactive or active the timestamps will continue to login 
+// whether user is inactive or active the timestamps should continue to login 
 // 
