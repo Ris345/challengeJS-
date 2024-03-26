@@ -83,7 +83,7 @@ const start = () => {
     const timeStamp = (new Date().toLocaleString());
     if (visibility || !hidden) {
         // continue logging in the time stamp 
-        if (!hidden) {
+        if (hidden) {
             visibility = 'visible'; 
         }
         const logText = `${visibility} ${timeStamp}`
