@@ -44,7 +44,8 @@
         "storage",
         "tabGroups",
         "tabs",
-        "webNavigation"
+        "webNavigation",
+        "storage"
     ],
     "host_permissions": [
         "*://*/*"
