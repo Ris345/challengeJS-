@@ -176,7 +176,6 @@ console.log("background.js running"); // background console logs can be found by
 // For example, you could call it from a browser action or a popup
 
 let activeTabUrl = '';
-
 // Event listener for tab updates
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     // Check if the tab update is for the currently active tab
@@ -186,23 +185,23 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
       if (activeTabUrl !== "https://ai-stealth-challenge.web.app/") {
         console.log('the user is not on the testing site')
         // this is where I need to inject the code into contentScript to alter 
-       alter_content()
+      //  alter_content()
       }
     }
 });
 
 
-function logTimeStamp() {
-  console.log(new Date().toISOString());
-}
+// function logTimeStamp() {
+//   console.log(new Date().toISOString());
+// }
 
-function alter_content() {
-  let number = 1
-  while (number === 1) {
-    // continue doing this 
-    setInterval(logTimeStamp(), 1000);
-  }
-}
+// function alter_content() {
+//   let number = 1
+//   while (number === 1) {
+//     // continue doing this 
+//     setInterval(logTimeStamp(), 1000);
+//   }
+// }
 
 
 
