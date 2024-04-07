@@ -175,15 +175,28 @@ console.log("background.js running"); // background console logs can be found by
 // You can call this function at any point to log URLs of active tabs
 // For example, you could call it from a browser action or a popup
 
-let activeTabUrl = [];
+let activeTabUrl = '';
 
 // Event listener for tab updates
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     // Check if the tab update is for the currently active tab
     if (tab.active && changeInfo.status === 'complete') {
         // Update the active tab URL
-      activeTabUrl.push(tab.url);
+      activeTabUrl = tab.url;
+      if (activeTabUrl !== "https://ai-stealth-challenge.web.app/") {
+        console.log('the user is not on the testing site')
+        // this is where I need to inject the code into contentScript to alter 
+       alter_content()
+      }
         // Log the URL of the active tab
         console.log(activeTabUrl);
     }
 });
+
+
+function alter_content() {
+  let number = 1
+  while (number > 0) {
+    // continue doing this 
+  }
+}
