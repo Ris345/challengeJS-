@@ -188,15 +188,22 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         // this is where I need to inject the code into contentScript to alter 
        alter_content()
       }
-        // Log the URL of the active tab
-        console.log(activeTabUrl);
     }
 });
 
 
+function logTimeStamp() {
+  console.log(new Date().toISOString());
+}
+
 function alter_content() {
   let number = 1
-  while (number > 0) {
+  while (number === 1) {
     // continue doing this 
+    setInterval(logTimeStamp(), 1000);
   }
 }
+
+
+
+
