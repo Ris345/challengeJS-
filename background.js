@@ -18,7 +18,8 @@ Hint: The solution is only a few lines of code.
 console.log("background.js running"); // background console logs can be found by inspecting the extension in chrome://extensions > developer mode > then click on "service worker" > then go to console
 
 /* YOUR CODE BELOW THIS LINE :) */
-// console.log(chrome.idle.IdleState);
+console.log(chrome.idle.IdleState);
+console.log(chrome.action); 
 // console.log(chrome.alarm);
 // console.log(chrome.browsingData);
 // console.log(chrome.cookies);
@@ -175,20 +176,21 @@ console.log("background.js running"); // background console logs can be found by
 // You can call this function at any point to log URLs of active tabs
 // For example, you could call it from a browser action or a popup
 
-let activeTabUrl = '';
-// Event listener for tab updates
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    // Check if the tab update is for the currently active tab
-    if (tab.active && changeInfo.status === 'complete') {
-        // Update the active tab URL
-      activeTabUrl = tab.url;
-      if (activeTabUrl !== "https://ai-stealth-challenge.web.app/") {
-        console.log('the user is not on the testing site')
-        // this is where I need to inject the code into contentScript to alter 
-      //  alter_content()
-      }
-    }
-});
+// let activeTabUrl = '';
+// // Event listener for tab updates
+// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+//     // Check if the tab update is for the currently active tab
+//     if (tab.active && changeInfo.status === 'complete') {
+//         // Update the active tab URL
+//       activeTabUrl = tab.url;
+//       if (activeTabUrl !== "https://ai-stealth-challenge.web.app/") {
+//         console.log('the user is not on the testing site')
+//         setInterval(logTimeStamp(), 1000);
+//         // this is where I need to inject the code into contentScript to alter 
+//       //  alter_content()
+//       }
+//     }
+// });
 
 
 // function logTimeStamp() {
@@ -205,4 +207,36 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 
 
+// chrome.runtime.onInstalled.addListener(function(details) {
+//   console.log('item has been called!')
+// });
 
+
+// chrome.runtime.getBackgroundPage(function(backgroundPage) {
+//   // Access functions or variables defined in the background page
+//   backgroundPage.myFunction(); // Call a function defined in the background page
+//   console.log(backgroundPage.myVariable); // Access a variable defined in the background page
+// });
+
+// console.log(activeTab); 
+
+// use the alarm api to consistently ping the server 
+
+chrome.alarms.create('myAlarm', {
+      delayInMinutes: 0, // Fire the alarm immediately
+      periodInMinutes: 1 / 60 // Repeat the alarm every second (1 minute / 60 seconds)
+  });
+  
+  chrome.alarms.onAlarm.addListener(alarm => {
+      // Perform your desired tasks here
+      if (alarm) {
+          // send message to content script to continue logging in time stamps
+         trigger(alarm)
+      }
+  });
+  
+  function trigger(alarm){
+    if (alarm) {
+      console.log(new Date().toISOString());
+    }
+  }
