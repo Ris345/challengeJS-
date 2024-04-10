@@ -207,6 +207,7 @@ console.log(chrome.action);
 
 
 
+
 // chrome.runtime.onInstalled.addListener(function(details) {
 //   console.log('item has been called!')
 // });
